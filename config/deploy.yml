@@ -1,0 +1,23 @@
+service: kamal-example
+
+image: tbuehlmann/kamal-example
+
+servers:
+  web:
+    hosts:
+      - <%= ENV.fetch("HOST_IP") %>
+    labels:
+      traefik.http.routers.kamal-example-web.rule: "Host(`kamal.example.com`)"
+
+registry:
+  server: ghcr.io
+
+  username: kamal
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+ssh:
+  user: kamal
+
+builder:
+  multiarch: false
